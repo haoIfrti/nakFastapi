@@ -23,3 +23,16 @@ build:
 	docker run -dit xxxx /bin/sh
 	# 进入容器
 	docker exec -it xxxx /bin/sh
+
+clean:
+	# dockerで使用している容量の確認
+	docker system df
+	# Containerの全削除
+	docker ps -aq | xargs docker rm
+	# Imageの全削除
+	docker images -aq | xargs docker rmi
+	# Imageの全削除（強制）
+	docker images -aq | xargs docker rmi -f
+
+	# 清理 没有开启的  Docker 镜像
+	docker system prune -a
